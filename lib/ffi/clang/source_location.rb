@@ -41,6 +41,7 @@ module FFI
 				@offset = offset.get_uint(0)
 			end
 
+			attr_reader :location
 			attr_reader :file, :line, :column, :offset
 		end
 	end

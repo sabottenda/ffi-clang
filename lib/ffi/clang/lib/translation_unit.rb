@@ -31,6 +31,7 @@ module FFI
 			# Source code translation units:
 			attach_function :parse_translation_unit, :clang_parseTranslationUnit, [:CXIndex, :string, :pointer, :int, :pointer, :uint, :uint], :CXTranslationUnit
 			attach_function :dispose_translation_unit, :clang_disposeTranslationUnit, [:CXTranslationUnit], :void
+			attach_function :get_translation_unit_spelling, :clang_getTranslationUnitSpelling, [:CXTranslationUnit], :string
 		end
 	end
 end

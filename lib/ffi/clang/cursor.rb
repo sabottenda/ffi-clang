@@ -159,6 +159,10 @@ module FFI
 				Cursor.new Lib.get_cursor_definition @cursor
 			end
 
+			def reference
+				Cursor.new Lib.get_cursor_reference(@cursor)
+			end
+
 			def template_kind
 				Lib.get_template_cursor_kind @cursor
 			end

@@ -21,6 +21,7 @@
 
 require 'ffi/clang/lib/translation_unit'
 require 'ffi/clang/cursor'
+require 'ffi/clang/file'
 
 module FFI
 	module Clang
@@ -33,6 +34,10 @@ module FFI
 				Lib.dispose_translation_unit(pointer)
 			end
 
+			def to_s
+				spelling
+			end
+
 			def diagnostics
 				n = Lib.get_num_diagnostics(self)
 			
@@ -41,8 +46,28 @@ module FFI
 				end
 			end
 
-			def cursor
-				Cursor.new(Lib.get_translation_unit_cursor(self))
+			def cursor(location = nil)
+				if location.nil?
+					Cursor.new Lib.get_translation_unit_cursor(self)
+				else
+					Cursor.new Lib.get_cursor(self, location.location)
+				end
+			end
+
+			def location(file, line, column)
+				SourceLocation.new Lib.get_location(self, file, line, column)
+			end
+
+			def location_offset(file, offset)
+				SourceLocation.new Lib.get_location_offset(self, file, offset)
+			end
+
+			def file(file_name)
+				File.new Lib.get_file(self, file_name)
+			end
+
+			def spelling
+				Lib.get_translation_unit_spelling(self)
 			end
 		end
 	end

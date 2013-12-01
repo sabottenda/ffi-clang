@@ -19,6 +19,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+require 'ffi/clang/lib/file'
+
 module FFI
 	module Clang
 		module Lib
@@ -29,6 +31,9 @@ module FFI
 				)
 			end
 
+
+			attach_function :get_location, :clang_getLocation, [:CXTranslationUnit, :CXFile, :uint, :uint], CXSourceLocation.by_value
+			attach_function :get_location_offset, :clang_getLocationForOffset, [:CXTranslationUnit, :CXFile, :uint], CXSourceLocation.by_value
 			attach_function :get_expansion_location, :clang_getExpansionLocation, [CXSourceLocation.by_value, :pointer, :pointer, :pointer, :pointer], :void
 		end
 	end

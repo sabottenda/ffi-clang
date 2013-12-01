@@ -231,6 +231,7 @@ module FFI
 			attach_function :cursor_get_raw_comment_text, :clang_Cursor_getRawCommentText, [CXCursor.by_value], CXString.by_value
 			attach_function :cursor_get_parsed_comment, :clang_Cursor_getParsedComment, [CXCursor.by_value], CXComment.by_value
 
+			attach_function :get_cursor, :clang_getCursor, [:CXTranslationUnit, CXSourceLocation.by_value], CXCursor.by_value
 			attach_function :get_cursor_location, :clang_getCursorLocation, [CXCursor.by_value], CXSourceLocation.by_value
 			attach_function :get_cursor_extent, :clang_getCursorExtent, [CXCursor.by_value], CXSourceRange.by_value
 			attach_function :get_cursor_display_name, :clang_getCursorDisplayName, [CXCursor.by_value], CXString.by_value
@@ -255,6 +256,7 @@ module FFI
 
 			attach_function :get_cursor_type, :clang_getCursorType, [CXCursor.by_value], CXType.by_value
 			attach_function :get_cursor_result_type, :clang_getCursorResultType, [CXCursor.by_value], CXType.by_value
+			attach_function :get_cursor_reference, :clang_getCursorReferenced, [CXCursor.by_value], CXCursor.by_value
 
 		end
 	end
