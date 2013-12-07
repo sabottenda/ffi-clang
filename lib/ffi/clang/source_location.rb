@@ -44,6 +44,14 @@ module FFI
 			attr_reader :location
 			attr_reader :file, :line, :column, :offset
 
+			def in_system_header?
+				Lib.location_in_system_header(@location) != 0
+			end
+
+			def from_main_file?
+				Lib.location_is_from_main_file(@location) != 0
+			end
+
 			def file_location
 			  loc = @location
 
