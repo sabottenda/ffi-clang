@@ -43,6 +43,40 @@ module FFI
 
 			attr_reader :location
 			attr_reader :file, :line, :column, :offset
+
+			def file_location
+			  loc = @location
+
+			  cxfile = MemoryPointer.new :pointer
+			  line	 = MemoryPointer.new :uint
+			  column = MemoryPointer.new :uint
+			  offset = MemoryPointer.new :uint
+
+			  Lib::get_file_location(loc, cxfile, line, column, offset)
+
+			  f = Lib.extract_string Lib.get_file_name(cxfile.read_pointer)
+			  l = line.get_uint(0)
+			  c = column.get_uint(0)
+			  o = offset.get_uint(0)
+			  return f, l, c, o
+			end
+
+			def spelling_location
+			  loc = @location
+
+			  cxfile = MemoryPointer.new :pointer
+			  line	 = MemoryPointer.new :uint
+			  column = MemoryPointer.new :uint
+			  offset = MemoryPointer.new :uint
+
+			  Lib::get_spelling_location(loc, cxfile, line, column, offset)
+
+			  f = Lib.extract_string Lib.get_file_name(cxfile.read_pointer)
+			  l = line.get_uint(0)
+			  c = column.get_uint(0)
+			  o = offset.get_uint(0)
+			  return f, l, c, o
+			end
 		end
 	end
 end

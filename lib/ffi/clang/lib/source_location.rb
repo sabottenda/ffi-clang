@@ -35,6 +35,8 @@ module FFI
 			attach_function :get_location, :clang_getLocation, [:CXTranslationUnit, :CXFile, :uint, :uint], CXSourceLocation.by_value
 			attach_function :get_location_offset, :clang_getLocationForOffset, [:CXTranslationUnit, :CXFile, :uint], CXSourceLocation.by_value
 			attach_function :get_expansion_location, :clang_getExpansionLocation, [CXSourceLocation.by_value, :pointer, :pointer, :pointer, :pointer], :void
+			attach_function :get_file_location, :clang_getFileLocation, [CXSourceLocation.by_value, :pointer, :pointer, :pointer, :pointer], :void
+			attach_function :get_spelling_location, :clang_getSpellingLocation, [CXSourceLocation.by_value, :pointer, :pointer, :pointer, :pointer], :void
 		end
 	end
 end
