@@ -21,9 +21,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+require 'ffi/clang/lib/source_range'
+
 module FFI
 	module Clang
 		class SourceRange
+			def self.null_range
+				SourceRange.new Lib.get_null_range
+			end
+
 			def initialize(range)
 				@range = range
 			end
@@ -34,6 +40,16 @@ module FFI
 
 			def end
 				SourceLocation.new(Lib.get_range_end @range)
+			end
+
+			def null?
+				Lib.range_is_null(@range) != 0
+			end
+
+			attr_reader :range
+
+			def ==(other)
+				Lib.equal_range(@range, other.range) != 0
 			end
 		end
 	end
