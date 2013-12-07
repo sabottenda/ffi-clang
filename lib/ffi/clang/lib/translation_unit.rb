@@ -26,7 +26,17 @@ module FFI
 		module Lib
 			typedef :pointer, :CXTranslationUnit
 
-			TranslationUnitFlags = enum [:none, :detailed_preprocessing_record, :incomplete, :precompiled_preamble, :cache_completion_results]
+			TranslationUnitFlags = enum [
+				:none,
+				:detailed_preprocessing_record,
+				:incomplete,
+				:precompiled_preamble,
+				:cache_completion_results,
+				:for_serialization,
+				:cxx_chained_pch,
+				:skip_function_bodies,
+				:include_brief_comments_in_code_completion,
+			]
 
 			# Source code translation units:
 			attach_function :parse_translation_unit, :clang_parseTranslationUnit, [:CXIndex, :string, :pointer, :int, :pointer, :uint, :uint], :CXTranslationUnit
