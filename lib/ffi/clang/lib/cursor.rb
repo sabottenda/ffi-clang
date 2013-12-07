@@ -264,11 +264,15 @@ module FFI
 
 			attach_function :get_cursor_type, :clang_getCursorType, [CXCursor.by_value], CXType.by_value
 			attach_function :get_cursor_result_type, :clang_getCursorResultType, [CXCursor.by_value], CXType.by_value
-			attach_function :get_cursor_reference, :clang_getCursorReferenced, [CXCursor.by_value], CXCursor.by_value
+			attach_function :get_cursor_referenced, :clang_getCursorReferenced, [CXCursor.by_value], CXCursor.by_value
 			attach_function :get_cursor_semantic_parent, :clang_getCursorSemanticParent, [CXCursor.by_value], CXCursor.by_value
 			attach_function :get_cursor_lexical_parent, :clang_getCursorLexicalParent, [CXCursor.by_value], CXCursor.by_value
 
 			attach_function :get_cursor_hash, :clang_hashCursor, [CXCursor.by_value], :uint
+
+			attach_function :get_cursor_availability, :clang_getCursorAvailability, [CXCursor.by_value], :availability
+
+			attach_function :get_included_file, :clang_getIncludedFile, [CXCursor.by_value], :CXFile
 		end
 	end
 end

@@ -171,8 +171,8 @@ module FFI
 				Cursor.new Lib.get_cursor_definition @cursor
 			end
 
-			def reference
-				Cursor.new Lib.get_cursor_reference(@cursor)
+			def referenced
+				Cursor.new Lib.get_cursor_referenced(@cursor)
 			end
 
 			def template_kind
@@ -205,6 +205,14 @@ module FFI
 
 			def hash
 				Lib.get_cursor_hash(@cursor)
+			end
+
+			def availability
+				Lib.get_cursor_availability(@cursor)
+			end
+
+			def included_file
+				File.new Lib.get_included_file(@cursor)
 			end
 
 			attr_reader :cursor
