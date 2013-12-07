@@ -147,6 +147,10 @@ module FFI
 				Lib.cxx_method_is_virtual(@cursor) != 0
 			end
 
+			def variadic?
+				Lib.is_variadic(@cursor) != 0
+			end
+
 			def pure_virtual?
 				Lib.cxx_method_is_pure_virtual(@cursor) != 0
 			end
