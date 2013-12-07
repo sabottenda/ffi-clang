@@ -236,6 +236,7 @@ module FFI
 			attach_function :get_cursor_extent, :clang_getCursorExtent, [CXCursor.by_value], CXSourceRange.by_value
 			attach_function :get_cursor_display_name, :clang_getCursorDisplayName, [CXCursor.by_value], CXString.by_value
 			attach_function :get_cursor_spelling, :clang_getCursorSpelling, [CXCursor.by_value], CXString.by_value
+			attach_function :get_cursor_usr, :clang_getCursorUSR, [CXCursor.by_value], CXString.by_value
 
 			attach_function :are_equal, :clang_equalCursors, [CXCursor.by_value, CXCursor.by_value], :uint
 
@@ -249,6 +250,8 @@ module FFI
 			attach_function :is_preprocessing, :clang_isPreprocessing, [:kind], :uint
 			attach_function :is_unexposed, :clang_isUnexposed, [:kind], :uint
 
+			attach_function :is_definition, :clang_isCursorDefinition, [CXCursor.by_value], :uint
+
 			enum :child_visit_result, [:break, :continue, :recurse]
 
 			callback :visit_children_function, [CXCursor.by_value, CXCursor.by_value, :pointer], :child_visit_result
@@ -257,7 +260,10 @@ module FFI
 			attach_function :get_cursor_type, :clang_getCursorType, [CXCursor.by_value], CXType.by_value
 			attach_function :get_cursor_result_type, :clang_getCursorResultType, [CXCursor.by_value], CXType.by_value
 			attach_function :get_cursor_reference, :clang_getCursorReferenced, [CXCursor.by_value], CXCursor.by_value
+			attach_function :get_cursor_semantic_parent, :clang_getCursorSemanticParent, [CXCursor.by_value], CXCursor.by_value
+			attach_function :get_cursor_lexical_parent, :clang_getCursorLexicalParent, [CXCursor.by_value], CXCursor.by_value
 
+			attach_function :get_cursor_hash, :clang_hashCursor, [CXCursor.by_value], :uint
 		end
 	end
 end

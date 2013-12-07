@@ -95,6 +95,10 @@ module FFI
 				Lib.is_unexposed(kind) != 0
 			end
 
+			def definition?
+				Lib.is_definition(@cursor) != 0
+			end
+
 			def location
 				SourceLocation.new(Lib.get_cursor_location(@cursor))
 			end
@@ -109,6 +113,10 @@ module FFI
 
 			def spelling
 				Lib.extract_string Lib.get_cursor_spelling(@cursor)
+			end
+
+			def usr
+				Lib.extract_string Lib.get_cursor_usr(@cursor)
 			end
 
 			def kind
@@ -175,12 +183,24 @@ module FFI
 				Lib.get_language @cursor
 			end
 
+			def semantic_parent
+				Cursor.new Lib.get_cursor_semantic_parent(@cursor)
+			end
+
+			def lexical_parent
+				Cursor.new Lib.get_cursor_lexical_parent(@cursor)
+			end
+
 			def visit_children(&block)
 				adapter = Proc.new do |cxcursor, parent_cursor, unused|
 					block.call Cursor.new(cxcursor), Cursor.new(parent_cursor)
 				end
 				
 				Lib.visit_children(@cursor, adapter, nil)
+			end
+
+			def hash
+				Lib.get_cursor_hash(@cursor)
 			end
 
 			attr_reader :cursor
