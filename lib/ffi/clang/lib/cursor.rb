@@ -24,6 +24,7 @@ require 'ffi/clang/lib/translation_unit'
 require 'ffi/clang/lib/diagnostic'
 require 'ffi/clang/lib/comment'
 require 'ffi/clang/lib/type'
+require 'ffi/clang/utils'
 
 module FFI
 	module Clang
@@ -211,7 +212,10 @@ module FFI
 			attach_function :is_dynamic_call, :clang_Cursor_isDynamicCall, [CXCursor.by_value], :uint
 			attach_function :cxx_method_is_static, :clang_CXXMethod_isStatic, [CXCursor.by_value], :uint
 			attach_function :cxx_method_is_virtual, :clang_CXXMethod_isVirtual, [CXCursor.by_value], :uint
-			attach_function :cxx_method_is_pure_virtual, :clang_CXXMethod_isPureVirtual, [CXCursor.by_value], :uint
+
+			if FFI::Clang::Utils::clang_major_version >= 3 && FFI::Clang::Utils::clang_minor_version >= 4
+				attach_function :cxx_method_is_pure_virtual, :clang_CXXMethod_isPureVirtual, [CXCursor.by_value], :uint
+			end
 			attach_function :cxx_get_access_specifier, :clang_getCXXAccessSpecifier, [CXCursor.by_value], :access_specifier
 			
 			enum :language_kind, [:invalid, :c, :obj_c, :c_plus_plus]
