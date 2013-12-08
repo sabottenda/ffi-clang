@@ -89,6 +89,13 @@ module FFI
 			attach_function :get_result_type, :clang_getResultType, [CXType.by_value], CXType.by_value
 			attach_function :get_canonical_type, :clang_getCanonicalType, [CXType.by_value], CXType.by_value
 			attach_function :is_const_qualified_type, :clang_isConstQualifiedType, [CXType.by_value], :uint
+			attach_function :is_volatile_qualified_type, :clang_isVolatileQualifiedType, [CXType.by_value], :uint
+			attach_function :is_restrict_qualified_type, :clang_isRestrictQualifiedType, [CXType.by_value], :uint
+
+			attach_function :get_element_type, :clang_getElementType, [CXType.by_value], CXType.by_value
+			attach_function :get_num_elements, :clang_getNumElements, [CXType.by_value], :long_long
+
+			attach_function :equal_types, :clang_equalTypes, [CXType.by_value, CXType.by_value], :uint
 		end
 	end
 end

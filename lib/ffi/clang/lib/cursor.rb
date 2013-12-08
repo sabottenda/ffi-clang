@@ -273,6 +273,11 @@ module FFI
 			attach_function :get_cursor_availability, :clang_getCursorAvailability, [CXCursor.by_value], :availability
 
 			attach_function :get_included_file, :clang_getIncludedFile, [CXCursor.by_value], :CXFile
+
+			attach_function :get_typedef_decl_underlying_type, :clang_getTypedefDeclUnderlyingType, [CXCursor.by_value], CXType.by_value
+			attach_function :get_enum_decl_integer_type, :clang_getEnumDeclIntegerType, [CXCursor.by_value], CXType.by_value
+
+			attach_function :get_type_declaration, :clang_getTypeDeclaration, [CXType.by_value], FFI::Clang::Lib::CXCursor.by_value
 		end
 	end
 end

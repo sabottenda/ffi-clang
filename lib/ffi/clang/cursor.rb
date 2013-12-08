@@ -215,6 +215,14 @@ module FFI
 				File.new Lib.get_included_file(@cursor)
 			end
 
+			def underlying_type
+				Type.new Lib.get_typedef_decl_underlying_type(@cursor)
+			end
+
+			def enum_decl_integer_type
+				Type.new Lib.get_decl_integer_type(@cursor)
+			end
+
 			attr_reader :cursor
 
 			def ==(other)
