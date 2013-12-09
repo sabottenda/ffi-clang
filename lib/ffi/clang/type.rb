@@ -18,9 +18,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+require 'ffi/clang/cursor'
+
 module FFI
 	module Clang
 		class Type
+			attr_reader :type
+
 			def initialize(type)
 				@type = type
 			end
@@ -61,12 +65,40 @@ module FFI
 				Lib.is_const_qualified_type(@type) != 0
 			end
 
+			def volatile_qualified?
+				Lib.is_volatile_qualified_type(@type) != 0
+			end
+
+			def restrict_qualified?
+				Lib.is_restrict_qualified_type(@type) != 0
+			end
+
 			def arg_type(i)
 				Type.new Lib.get_arg_type(@type, i)
 			end
 
 			def result_type
 				Type.new Lib.get_result_type(@type)
+			end
+
+			def element_type
+				Type.new Lib.get_element_type(@type)
+			end
+
+			def num_elements
+				Lib.get_num_elements(@type)
+			end
+
+			def get_decl_cursor
+				Cursor.new Lib.get_type_decl(@type)
+			end
+
+			def declaration
+				Cursor.new Lib.get_type_declaration(@type)
+			end
+
+			def ==(other)
+				Lib.equal_types(@type, other.type) != 0
 			end
 		end
 	end
