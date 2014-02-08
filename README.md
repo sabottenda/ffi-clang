@@ -4,6 +4,7 @@ A light weight wrapper for Ruby exposing [libclang][1].
 
 [![Build Status](https://secure.travis-ci.org/ioquatix/ffi-clang.png)](http://travis-ci.org/ioquatix/ffi-clang)
 [![Code Climate](https://codeclimate.com/github/ioquatix/ffi-clang.png)](https://codeclimate.com/github/ioquatix/ffi-clang)
+[![Coverage Status](https://coveralls.io/repos/sabottenda/ffi-clang/badge.png?branch=coveralls)](https://coveralls.io/r/sabottenda/ffi-clang?branch=coveralls)
 
 [1]: http://llvm.org/devmtg/2010-11/Gregor-libclang.pdf
 
