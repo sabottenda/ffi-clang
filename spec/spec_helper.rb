@@ -1,4 +1,8 @@
 $LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+
+require 'coveralls'
+Coveralls.wear!
+
 require 'ffi/clang'
 
 include FFI::Clang
